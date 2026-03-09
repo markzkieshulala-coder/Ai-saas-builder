@@ -1,0 +1,35 @@
+import OpenAI from "openai"
+
+export async function POST(req){
+
+const body=await req.json()
+
+const openai=new OpenAI({
+apiKey:process.env.OPENAI_KEY
+})
+
+const prompt=`
+Create a modern ${body.type} website.
+
+Business name: ${body.name}
+
+Description: ${body.desc}
+
+Return full HTML with CSS styling.
+`
+
+const completion=await openai.chat.completions.create({
+
+model:"gpt-4o-mini",
+
+messages:[
+{role:"user",content:prompt}
+]
+
+})
+
+return Response.json({
+html:completion.choices[0].message.content
+})
+
+}

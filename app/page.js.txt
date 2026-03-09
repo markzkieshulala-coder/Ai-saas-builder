@@ -1,0 +1,39 @@
+"use client"
+
+import { useState } from "react"
+
+export default function Home(){
+
+const [email,setEmail]=useState("")
+
+function login(){
+
+localStorage.setItem("user",email)
+
+window.location="/dashboard"
+
+}
+
+return(
+
+<div style={{padding:"40px",fontFamily:"Arial"}}>
+
+<h1>AI Website Builder</h1>
+
+<p>Create websites instantly with AI.</p>
+
+<input
+placeholder="Enter Email"
+value={email}
+onChange={(e)=>setEmail(e.target.value)}
+/>
+
+<button onClick={login}>
+Login
+</button>
+
+</div>
+
+)
+
+}
